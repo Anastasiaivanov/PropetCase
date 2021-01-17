@@ -24,30 +24,9 @@ public class TestBase {
         wd.navigate().to("http://propets-frontend.herokuapp.com/propets");
     }
 
-    @Test
-    public void logIn() throws InterruptedException {
-        click(By.cssSelector("*[class*='header-signin-btn']"));
-        type(By.cssSelector("[name=name]"), "Ana");
-        type(By.cssSelector("[name=emailReg]"), "ana@mail.com");
-        type(By.cssSelector("[name=passwordReg]"), "Ana@mail1236");
-        type(By.cssSelector("[name=passwordReg2]"), "Ana@mail1236");
-        click(By.cssSelector("[type=submit]"));
-        Thread.sleep(1000);
-        String parentWindowHandler = wd.getWindowHandle();
-        String subWindowHandler = null;
-        Set<String> handles = wd.getWindowHandles();
-        Iterator<String> iterator = handles.iterator();
-        while(iterator.hasNext()){
-            subWindowHandler=iterator.next();
-        }
-        wd.switchTo().window(subWindowHandler);
-        Thread.sleep(6000);
-        click(By.cssSelector("*[class*='btn-signin']"));
-        type(By.cssSelector("[name=email]"), "ana@mail.com");
-        type(By.cssSelector("[name=password]"), "Ana@mail1236");
-        click(By.cssSelector("[type=submit]"));
+@Test
+    public void findPet(){
 
-        Assert.assertNotNull(wd.findElement(By.cssSelector(".fas fa-sign-out-alt")));
     }
 
     public void click(By locator) {
