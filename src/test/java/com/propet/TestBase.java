@@ -8,6 +8,8 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.util.Iterator;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 public class TestBase {
@@ -30,8 +32,16 @@ public class TestBase {
         type(By.cssSelector("[name=passwordReg]"), "Ana@mail1236");
         type(By.cssSelector("[name=passwordReg2]"), "Ana@mail1236");
         click(By.cssSelector("[type=submit]"));
-        Actions action = new Actions(wd);
-        action.sendKeys(Keys.ENTER).build().perform();
+        Thread.sleep(1000);
+        String parentWindowHandler = wd.getWindowHandle();
+        String subWindowHandler = null;
+        Set<String> handles = wd.getWindowHandles();
+        Iterator<String> iterator = handles.iterator();
+        while(iterator.hasNext()){
+            subWindowHandler=iterator.next();
+        }
+        wd.switchTo().window(subWindowHandler);
+        Thread.sleep(6000);
         click(By.cssSelector("*[class*='btn-signin']"));
         type(By.cssSelector("[name=email]"), "ana@mail.com");
         type(By.cssSelector("[name=password]"), "Ana@mail1236");
