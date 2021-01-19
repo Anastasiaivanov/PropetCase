@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
 public class SignInTest extends TestBase{
-    
+
     @Test
     public void signIn(){
         click(By.cssSelector("*[class*='header-signin-btn']"));
